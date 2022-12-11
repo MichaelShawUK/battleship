@@ -1,19 +1,21 @@
 const Ship = (length, start, orientation) => {
-
   let hits = 0;
 
-  function getEndPoint(length, start, orientation) {
-    if (orientation === 'vertical') {
-      return [start[0], start[1] + length - 1]
-    } else if (orientation === 'horizontal') {
-      return [(start[0] + length - 1), start[1]]
+  function getOccupiedSquares(length, start, orientation) {
+    const squares = [];
+    for (let i = 0; i < length; i++) {
+      if (orientation === "vertical") {
+        squares.push([start[0], start[1] + i]);
+      } else if (orientation === "horizontal") {
+        squares.push([start[0] + i, start[1]]);
+      }
     }
+    return squares;
   }
 
   return {
     length,
-    start,
-    end: getEndPoint(length, start, orientation),
+    squares: getOccupiedSquares(length, start, orientation),
     hits,
     hit() {
       this.hits++;
@@ -21,8 +23,8 @@ const Ship = (length, start, orientation) => {
     isSunk() {
       if (this.hits === this.length) return true;
       return false;
-    }
-  }
-}
+    },
+  };
+};
 
 export default Ship;
