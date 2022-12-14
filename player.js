@@ -23,6 +23,9 @@ const Player = (name) => {
       this.opponent = opp;
     },
     attack(coordinate=null) {
+      if (coordinate === null) {
+        coordinate = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
+      }
       this.opponent.position.receiveAttack(coordinate);
     }
   }

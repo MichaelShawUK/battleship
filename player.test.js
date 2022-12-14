@@ -17,5 +17,9 @@ test("Player can attack enemy's gameboard", () => {
 })
 
 test("Computer randomly selects square on player's board", () => {
-  
+  const player1 = Player("Player One");
+  const cpu = Player("Computer");
+  cpu.setOpponent(player1);
+  cpu.attack();
+  expect(Object.values(player1.position.board)).toContain("clicked");
 })
