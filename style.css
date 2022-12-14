@@ -1,0 +1,28 @@
+:root {
+  --box-size: 40px;
+}
+
+body {
+  display: grid;
+  justify-content: center;
+}
+
+.gameboard div {
+  border: 1px solid black;
+  height: var(--box-size);
+  width: var(--box-size);
+}
+
+.gameboard div:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(10, var(--box-size));
+}
+
+.ship {
+  background-color: steelblue;
+}
