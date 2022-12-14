@@ -7,7 +7,6 @@ const Gameboard = (ships) => {
   }
 
   return {
-    ships,
     board,
     receiveAttack(coordinate) {
       if (board[coordinate] === "unselected") {
