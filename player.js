@@ -26,7 +26,9 @@ const Player = (name) => {
       if (coordinate === null) {
         coordinate = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
       }
-      this.opponent.position.receiveAttack(coordinate);
+      if (!this.opponent.position.receiveAttack(coordinate)) {
+        if (this.name === "Computer") this.attack();
+      }
     }
   }
 }

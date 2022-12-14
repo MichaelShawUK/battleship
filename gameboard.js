@@ -16,7 +16,8 @@ const Gameboard = (ships) => {
             if (`${coordinate}` === `${square}`) ship.hit();
           }
         }
-      }
+        return true;
+      } else return false;
     },
     allShipsSunk() {
       for (let ship of ships) {

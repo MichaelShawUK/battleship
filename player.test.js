@@ -23,3 +23,15 @@ test("Computer randomly selects square on player's board", () => {
   cpu.attack();
   expect(Object.values(player1.position.board)).toContain("clicked");
 })
+
+test("Computer chooses different square if already clicked", () => {
+  const player1 = Player("Player One");
+  const cpu = Player("Computer");
+  cpu.setOpponent(player1);
+  for (let key in player1.position.board) {
+    player1.position.board[key] = "clicked";
+  }
+  player1.position.board["2,5"] = "unselected";
+  cpu.attack();
+  expect(Object.values(player1.position.board)).not.toContain("unselected");
+})
