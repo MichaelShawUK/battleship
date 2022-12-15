@@ -45,6 +45,7 @@ const Player = (name) => {
       if (!this.opponent.position.receiveAttack(coordinate)) {
         if (this.name === "Computer") this.attack();
       }
+      // return coordinate;
     }
   }
 }

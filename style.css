@@ -2,6 +2,10 @@
   --box-size: 40px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: grid;
   justify-content: center;
@@ -14,7 +18,7 @@ body {
 }
 
 .gameboard div:hover {
-  background-color: #ddd;
+  border: 1px solid red;
   cursor: pointer;
 }
 
@@ -25,4 +29,16 @@ body {
 
 .ship {
   background-color: steelblue;
+}
+
+.clicked {
+  background-color: plum;
+}
+
+.ship.clicked {
+  background-color: crimson;
+}
+
+.enemy-ship.clicked {
+  background-color: palegreen;
 }

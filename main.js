@@ -1,4 +1,8 @@
-import { drawBoard, displayShips, clickListener } from "./dom.js";
+import {
+  drawBoard,
+  displayShips,
+  clickListener,
+} from "./dom.js";
 import Player from "./player.js";
 
 document.body.append(drawBoard("Computer"));
@@ -12,4 +16,11 @@ cpu.setOpponent(player1);
 displayShips(player1);
 displayShips(cpu);
 clickListener();
+// console.log(player1.position.board);
+// registerEnemyAttack(cpu.attack());
+// registerEnemyAttack(cpu.attack());
+// console.log(player1.position.board);
+
+
+
 
