@@ -1,6 +1,17 @@
 import Ship from "./ship.js";
 import Gameboard from "./gameboard.js";
 
+
+function createEnemyShips() {
+  const carrier = Ship(5, [3, 7], "horizontal");
+  const battleship = Ship(4, [0, 2], "vertical");
+  const destroyer = Ship(3, [2, 5], "horizontal");
+  const submarine = Ship(3, [8, 4], "vertical");
+  const patrolBoat = Ship(2, [4, 2], "horizontal");
+
+  return [carrier, battleship, destroyer, submarine, patrolBoat];
+}
+
 const Player = (name) => {
 
   let opponent = null;
@@ -11,8 +22,13 @@ const Player = (name) => {
   const submarine = Ship(3, [1, 7], "horizontal");
   const patrolBoat = Ship(2, [1, 9], "horizontal");
 
-  const ships = [carrier, battleship, destroyer, submarine, patrolBoat];
-  const position = Gameboard(ships);
+  let ships = [carrier, battleship, destroyer, submarine, patrolBoat];
+  let position = Gameboard(ships);
+
+  if (name === "Computer") {
+    ships = createEnemyShips();
+    position = Gameboard(ships);
+  }
 
   return {
     name,

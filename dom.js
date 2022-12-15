@@ -1,3 +1,5 @@
+import { player1, cpu } from "./main.js";
+
 function drawBoard(player) {
 
   const div = document.createElement("div");
@@ -27,4 +29,15 @@ function displayShips(player) {
   }
 }
 
-export { drawBoard, displayShips };
+function clickListener() {
+  const cells = document.querySelectorAll("#Computer-board div");
+  cells.forEach(cell => {
+    cell.addEventListener("click", () => {
+      console.log(cell.dataset.coordinate);
+      player1.attack(cell.dataset.coordinate);
+      console.log(cpu.position.board);
+    })
+  })
+}
+
+export { drawBoard, displayShips, clickListener };
