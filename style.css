@@ -21,6 +21,10 @@ body {
   cursor: pointer;
 }
 
+#PlayerOne-board div:hover {
+  cursor: pointer;
+}
+
 .gameboard {
   display: grid;
   grid-template-columns: repeat(10, var(--box-size));
@@ -40,4 +44,8 @@ body {
 
 .enemy-ship.clicked {
   background-color: palegreen;
+}
+
+.possible {
+  background-color: gold;
 }
