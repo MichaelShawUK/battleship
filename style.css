@@ -14,10 +14,9 @@ body {
 .gameboard div {
   border: 1px solid black;
   height: var(--box-size);
-  width: var(--box-size);
 }
 
-.gameboard div:hover {
+#Computer-board div:hover {
   border: 1px solid red;
   cursor: pointer;
 }

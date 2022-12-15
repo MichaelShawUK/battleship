@@ -8,7 +8,6 @@ import Player from "./player.js";
 document.body.append(drawBoard("Computer"));
 document.body.append(document.createElement("hr"));
 document.body.append(drawBoard("PlayerOne"));
-
 export const player1 = Player("PlayerOne");
 export const cpu = Player("Computer");
 player1.setOpponent(cpu);
@@ -17,6 +16,7 @@ displayShips(player1);
 displayShips(cpu);
 clickListener();
 
+
 export function isGameOver() {
   if (player1.position.allShipsSunk()) {
     console.log("COMPUTER WINS");
@@ -24,7 +24,3 @@ export function isGameOver() {
     console.log("PLAYER WINS");
   }
 }
-
-
-
-

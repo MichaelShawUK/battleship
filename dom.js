@@ -32,16 +32,20 @@ function displayShips(player) {
 function clickListener() {
   const cells = document.querySelectorAll("#Computer-board div");
   cells.forEach((cell) => {
-    cell.addEventListener("click", () => {
-      if (!Array.from(cell.classList).includes("clicked")) {
-        cell.classList.add("clicked");
-        player1.attack(cell.dataset.coordinate);
-        cpu.attack();
-        registerEnemyAttack();
-        isGameOver();
-      }
-    });
+    cell.addEventListener("click", registerClick);
   });
+}
+
+function registerClick() {
+  if (!Array.from(this.classList).includes("clicked")) {
+    this.classList.add("clicked");
+    player1.attack(this.dataset.coordinate);
+    cpu.attack();
+    registerEnemyAttack();
+    if (isGameOver()) {
+      this.removeEventListener("click", registerClick);
+    }
+  }
 }
 
 function registerEnemyAttack() {
