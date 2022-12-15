@@ -1,4 +1,4 @@
-import { player1, cpu } from "./main.js";
+import { player1, cpu, isGameOver} from "./main.js";
 
 function drawBoard(player) {
   const div = document.createElement("div");
@@ -33,12 +33,13 @@ function clickListener() {
   const cells = document.querySelectorAll("#Computer-board div");
   cells.forEach((cell) => {
     cell.addEventListener("click", () => {
-      cell.classList.add("clicked");
-      player1.attack(cell.dataset.coordinate);
-      cpu.attack();
-      registerEnemyAttack();
-      // registerEnemyAttack(cpu.attack());
-      console.table(player1.ships);
+      if (!Array.from(cell.classList).includes("clicked")) {
+        cell.classList.add("clicked");
+        player1.attack(cell.dataset.coordinate);
+        cpu.attack();
+        registerEnemyAttack();
+        isGameOver();
+      }
     });
   });
 }
@@ -47,12 +48,12 @@ function registerEnemyAttack() {
   const board = player1.position.board;
   for (let key in board) {
     if (board[key] === "clicked") {
-      const cell = document.querySelector(`#PlayerOne-board [data-coordinate="${key}"]`);
+      const cell = document.querySelector(
+        `#PlayerOne-board [data-coordinate="${key}"]`
+      );
       cell.classList.add("clicked");
     }
   }
-  // const cell = document.querySelector(`#PlayerOne-board [data-coordinate="${coordinate}"]`);
-  // cell.classList.add("clicked");
 }
 
 export { drawBoard, displayShips, clickListener, registerEnemyAttack };

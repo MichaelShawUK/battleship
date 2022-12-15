@@ -16,10 +16,14 @@ cpu.setOpponent(player1);
 displayShips(player1);
 displayShips(cpu);
 clickListener();
-// console.log(player1.position.board);
-// registerEnemyAttack(cpu.attack());
-// registerEnemyAttack(cpu.attack());
-// console.log(player1.position.board);
+
+export function isGameOver() {
+  if (player1.position.allShipsSunk()) {
+    console.log("COMPUTER WINS");
+  } else if (cpu.position.allShipsSunk()) {
+    console.log("PLAYER WINS");
+  }
+}
 
 
 
