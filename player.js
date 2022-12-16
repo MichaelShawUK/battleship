@@ -13,17 +13,17 @@ function createEnemyShips() {
 }
 
 const Player = (name) => {
-
   let opponent = null;
+  
+  // const carrier = Ship(5, positions[0], "horizontal");
+  // const battleship = Ship(4, positions[1], "horizontal");
+  // const destroyer = Ship(3, positions[2], "horizontal");
+  // const submarine = Ship(3, positions[3], "horizontal");
+  // const patrolBoat = Ship(2, positions[4], "horizontal");
 
-  const carrier = Ship(5, [1, 1], "horizontal");
-  const battleship = Ship(4, [1, 3], "horizontal");
-  const destroyer = Ship(3, [1, 5], "horizontal");
-  const submarine = Ship(3, [1, 7], "horizontal");
-  const patrolBoat = Ship(2, [1, 9], "horizontal");
-
-  let ships = [carrier, battleship, destroyer, submarine, patrolBoat];
+  let ships = [];
   let position = Gameboard(ships);
+  
 
   if (name === "Computer") {
     ships = createEnemyShips();

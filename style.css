@@ -49,3 +49,7 @@ body {
 .possible {
   background-color: gold;
 }
+
+#rotate-btn {
+  display: none;
+}
