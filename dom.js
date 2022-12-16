@@ -75,8 +75,6 @@ function alreadyOccupied(chosenSquares) {
   for (let ship of player1.ships) {
     for (let square of ship.squares) {
       for (let chosen of chosenSquares) {
-        console.log("chosen", chosen);
-        console.log("square", square);
         if (`${chosen}` == `${square}`) {
           return true;
         }
@@ -96,101 +94,51 @@ function displayShip(ship) {
   }
 }
 
-function placeShips() {
-  const ships = ["carrier", "battleship", "destroyer", "submarine", "patrol boat"];
+function placementFeedback(length) {
 
-  const div = document.createElement("div");
-  const rotateBtn = document.createElement("button");
-  rotateBtn.append("ROTATE");
-  rotateBtn.classList.add("horizontal");
-  document.body.append(rotateBtn, div);
+  const selector = `#PlayerOne-board [data-coordinate="`;
+  const rotateBtn = document.getElementById("rotate-btn");
+  let orientation = rotateBtn.classList[0];
   rotateBtn.addEventListener("click", () => {
-    rotateBtn.classList.toggle("horizontal");
-    rotateBtn.classList.toggle("vertical");
-  });
+    orientation = rotateBtn.classList[0];
+  })
 
-  let notYetClicked = true;
-
-  while (notYetClicked) {
-    let length = null;
-    let ship = ships.shift();
-    switch (ship) {
-      case "carrier":
-        length = 5;
-        break;
-      case "battleship":
-        length = 4;
-        break;
-      case "destroyer":
-        length = 3;
-        break;
-      case "submarine":
-        length = 3;
-        break;
-      case "patrol boat":
-        length = 2;
+  function highlight(event) {
+    const coord = event.target.dataset.coordinate.split(',');
+    for (let i = 0; i < length; i++) {
+      if (orientation === "horizontal") {
+        try {
+          let adjacent = document.querySelector(`${selector}${+coord[0] + i},${coord[1]}"]`);
+          adjacent.classList.add("possible");
+        } catch {
+          continue;
+        }
+      } else if (orientation === "vertical") {
+        try {
+          let adjacent = document.querySelector(`${selector}${coord[0]},${+coord[1] + i}"]`);
+          adjacent.classList.add("possible");
+        } catch {
+          continue;
+        }
+      }
     }
-    notYetClicked = false;
-    div.append(`Place ${ship}`);
-    const cells = document.querySelectorAll("#PlayerOne-board div");
-    cells.forEach((cell) => {
-      cell.addEventListener("mouseover", () => {
-        const orientation = rotateBtn.classList[0];
-        console.log(orientation);
-        const coordinate = cell.dataset.coordinate.split(",");
-        cell.classList.add("possible");
-        for (let i = 1; i < 5; i++) {
-          if (orientation === "horizontal") {
-            if (+coordinate[0] + i > 9) continue;
-            let adjacent = document.querySelector(
-              `#PlayerOne-board [data-coordinate="${+coordinate[0] + i},${
-                coordinate[1]
-              }"`
-            );
-            adjacent.classList.add("possible");
-          } else if (orientation === "vertical") {
-            if (+coordinate[1] + i > 9) continue;
-            let adjacent = document.querySelector(
-              `#PlayerOne-board [data-coordinate="${coordinate[0]},${
-                +coordinate[1] + i
-              }"`
-            );
-            adjacent.classList.add("possible");
-          }
-        }
-      });
-      cell.addEventListener("mouseout", () => {
-        cells.forEach((cell) => cell.classList.remove("possible"));
-      });
-      cell.addEventListener("click", () => {
-        notYetClicked = true;
-        const orientation = rotateBtn.classList[0];
-        const coordinate = cell.dataset.coordinate.split(',');
-        console.log(coordinate);
-        for (let i = 0; i < 5; i++) {
-          if (orientation === "horizontal") {
-            if (+coordinate[0] + i > 9) continue;
-            let adjacent = document.querySelector(
-              `#PlayerOne-board [data-coordinate="${+coordinate[0] + i},${
-                coordinate[1]
-              }"`
-            );
-            adjacent.classList.add("ship");
-          } else if (orientation === "vertical") {
-            if (+coordinate[1] + i > 9) continue;
-            let adjacent = document.querySelector(
-              `#PlayerOne-board [data-coordinate="${coordinate[0]},${
-                +coordinate[1] + i
-              }"`
-            );
-            adjacent.classList.add("ship");
-          }
-        }
-      })
-    });
   }
 
+  const cells = document.querySelectorAll("#PlayerOne-board div");
+  cells.forEach(cell => {
+    cell.addEventListener("mouseover", highlight)
+    cell.addEventListener("mouseout", () => {
+      cells.forEach(cell => cell.classList.remove("possible"));
+    })
+  })
+  return highlight;
+}
 
+function removeListener(callback) {
+  const cells = document.querySelectorAll("#PlayerOne-board div");
+  cells.forEach(cell => {
+    cell.removeEventListener("mouseover", callback);
+  })
 }
 
 function displayShips(player) {
@@ -244,5 +192,7 @@ export {
   initRotateBtn,
   displayShip,
   createFleet,
-  endOfInit
+  endOfInit,
+  placementFeedback,
+  removeListener
 };

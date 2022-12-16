@@ -5,7 +5,9 @@ import {
   initRotateBtn,
   displayShip,
   createFleet,
-  endOfInit
+  endOfInit,
+  placementFeedback,
+  removeListener
 } from "./dom.js";
 import Player from "./player.js";
 
@@ -31,9 +33,11 @@ clickListener();
 
 async function initShips() {
   for (let ship of startingShips) {
+    const callback = placementFeedback(ship.length);
     let boat = await createFleet(ship);
     player1.ships.push(boat);
     displayShip(boat);
+    removeListener(callback);
   }
   endOfInit();
 }
