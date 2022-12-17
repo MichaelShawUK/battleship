@@ -9,8 +9,17 @@
     <script type="module" src="main.js" defer></script>
   </head>
   <body>
+    <h1>BATTLESHIP</h1>
     <div id="gameboards"></div>
     <div id="info"></div>
-    <button id="rotate-btn" class="horizontal">ROTATE</button>
+    <div class="container">
+      <img src="img/rotate_right.png" id="rotate-btn" class="horizontal">
+    </div>
+    <div id="modal-container" class="modal">
+      <div id="winner-modal" class="modal-content">
+        <div id="winner"></div>
+        <button id="play-again">PLAY AGAIN</button>
+      </div>
+    </div>
   </body>
 </html>

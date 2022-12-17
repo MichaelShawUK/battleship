@@ -7,7 +7,7 @@ import {
   createFleet,
   endOfInit,
   placementFeedback,
-  removeListener
+  removeListener,
 } from "./dom.js";
 import Player from "./player.js";
 
@@ -44,8 +44,8 @@ async function initShips() {
 
 export function isGameOver() {
   if (player1.position.allShipsSunk()) {
-    console.log("COMPUTER WINS");
+    return "COMPUTER";
   } else if (cpu.position.allShipsSunk()) {
-    console.log("PLAYER WINS");
-  }
+    return "PLAYER ONE"
+  } else return false;
 }

@@ -19,16 +19,21 @@ function drawBoard(player) {
 function initRotateBtn() {
   const rotateBtn = document.getElementById("rotate-btn");
   rotateBtn.addEventListener("click", () => {
+    if (rotateBtn.classList[0] === "horizontal") {
+      rotateBtn.src = "./img/rotate_left.png";
+    } else rotateBtn.src = "./img/rotate_right.png";
     rotateBtn.classList.toggle("horizontal");
     rotateBtn.classList.toggle("vertical");
   })
 }
 
 function endOfInit() {
+  const cpuBoard = document.getElementById("Computer-board");
   const rotateBtn = document.getElementById("rotate-btn");
   rotateBtn.style.display = "none";
   const info = document.getElementById("info");
   info.innerText = "";
+  cpuBoard.style.display = "grid";
 }
 
 function waitForClick() {
@@ -45,9 +50,9 @@ function waitForClick() {
 
 function drawBoards() {
   const gameboards = document.getElementById("gameboards");
-  gameboards.append(drawBoard("Computer"));
-  gameboards.append(document.createElement("hr"));
   gameboards.append(drawBoard("PlayerOne"));
+  gameboards.append(document.createElement("hr"));
+  gameboards.append(drawBoard("Computer"));
 }
 
 async function createFleet(input) {
@@ -142,7 +147,6 @@ function removeListener(callback) {
 
 function displayShips(player) {
   const cells = document.querySelectorAll(`#${player.name}-board div`);
-  console.log(player.ships);
   for (let ship of player.ships) {
     for (let square of ship.squares) {
       for (let cell of cells) {
@@ -169,7 +173,16 @@ function registerClick() {
     cpu.attack();
     registerEnemyAttack();
     isGameOver();
+    if (isGameOver()) displayWinner(isGameOver());
   }
+}
+
+function displayWinner(player) {
+  const modalContainer = document.getElementById("modal-container");
+  const winner = document.getElementById("winner");
+  winner.innerText = `${player} WINS`;
+  modalContainer.style.display = "block";
+  reloadPage();
 }
 
 function registerEnemyAttack() {
@@ -184,6 +197,11 @@ function registerEnemyAttack() {
   }
 }
 
+function reloadPage() {
+  const playAgain = document.getElementById("play-again");
+  playAgain.addEventListener("click", () => location.reload());
+}
+
 export {
   displayShips,
   clickListener,
@@ -193,5 +211,5 @@ export {
   createFleet,
   endOfInit,
   placementFeedback,
-  removeListener
+  removeListener,
 };
