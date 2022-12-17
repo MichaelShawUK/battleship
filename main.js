@@ -24,7 +24,7 @@ export const cpu = Player("Computer");
 
 drawBoards();
 initRotateBtn();
-initShips();
+await initShips();
 player1.setOpponent(cpu);
 cpu.setOpponent(player1);
 displayShips(cpu);

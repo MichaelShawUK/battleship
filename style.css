@@ -50,6 +50,6 @@ body {
   background-color: gold;
 }
 
-#rotate-btn {
-  display: none;
+.enemy-ship {
+  background-color: tomato;
 }

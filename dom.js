@@ -18,7 +18,6 @@ function drawBoard(player) {
 
 function initRotateBtn() {
   const rotateBtn = document.getElementById("rotate-btn");
-  rotateBtn.style.display = "block";
   rotateBtn.addEventListener("click", () => {
     rotateBtn.classList.toggle("horizontal");
     rotateBtn.classList.toggle("vertical");
